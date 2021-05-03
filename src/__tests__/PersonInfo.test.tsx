@@ -13,6 +13,24 @@ describe("<PersonInfo />", () => {
 
   const onSelect = jest.fn();
 
+  it("Should render person info", () => {
+    const { getByText } = render(
+      <PersonInfo
+        person={person1}
+        selected={personIsSelected}
+        onSelect={onSelect}
+      />
+    );
+
+    const emailInfo = getByText(person1.emailAddress);
+    const firstNameLastNameInfo = getByText(person1.firstNameLastName);
+    const jobTitleInfo = getByText(person1.jobTitle);
+
+    expect(emailInfo).toBeInTheDocument();
+    expect(firstNameLastNameInfo).toBeInTheDocument();
+    expect(jobTitleInfo).toBeInTheDocument();
+  });
+
   it("Should fire function onSelect after clicking on person", () => {
     const { getByRole } = render(
       <PersonInfo
