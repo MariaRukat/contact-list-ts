@@ -14,8 +14,8 @@ code {
 .App {
   text-align: center;
   display: flex;
-  justify-content: center;
-  align-items: space-between;
+  flex-direction: column;
+  align-items: center;
   margin: 20px 0;
 }
 
@@ -26,9 +26,15 @@ code {
   margin: 10px 20px 0 0;
 }
 
+/* PERSON INFO */
 .person-info:hover {
   padding: 30px;
   border: 2px solid pink;
+}
+
+.person-info.person-info-selected {
+  outline: 2px solid #7c7c7c;
+  outline-offset: 2px;
 }
 
 .firstNameLastName {
@@ -49,4 +55,73 @@ code {
   color: #666666;
   font-size: 14px;
   line-height: 1.8em;
+}
+
+/* ERROR INFO */
+
+.error-info {
+  color: #333333;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 20px 0 0;
+}
+
+/* BUTTON */
+.load-more-btn {
+  font-size: 20px;
+  background-color: #333333;
+  color: white;
+  border: 2px solid #333333;
+  border-radius: 6px;
+  padding: 20px 30px;
+  margin: 30px 0;
+  cursor: pointer;
+}
+.load-more-btn:hover {
+  background-color: white;
+  color: #333333;
+}
+.load-more-btn:disabled {
+  background-color: #666666;
+  border-color: #666666;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* LOADER */
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-inner {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  margin: 20px;
+  background-color: #666666;
+  animation: loader-bounce 1.5s 0.1s linear infinite;
+}
+
+.loader-inner:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader-inner:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes loader-bounce {
+  0%,
+  50%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.7);
+  }
+  75% {
+    transform: scale(1.3);
+  }
 }
