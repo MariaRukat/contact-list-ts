@@ -1,27 +1,11 @@
 import React, { useState, useCallback } from "react";
-import apiData from "./api";
-import PersonInfo, { TPerson } from "./PersonInfo";
+import PersonInfo from "./PersonInfo";
 import Loader from "./Loader";
+import useFetchData from "./useFetchData";
 
 function App() {
-  const [data, setData] = useState<TPerson[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [disabledBtn, setDisabledBtn] = useState(false);
-
-  const fetchData = async () => {
-    setLoading(true);
-    error && setError("");
-    try {
-      const fetchedData = await apiData();
-      setData([...data, ...fetchedData]);
-      if (!fetchedData.length) setDisabledBtn(true);
-    } catch (err) {
-      setError(err.message);
-    }
-    setLoading(false);
-  };
+  const { data, loading, error, fetchData } = useFetchData();
 
   const onPersonSelect = useCallback(
     (personId: string, isSelected: boolean) => {
@@ -54,11 +38,7 @@ function App() {
           <p> Please try again.</p>
         </div>
       )}
-      <button
-        onClick={fetchData}
-        disabled={disabledBtn}
-        className="load-more-btn"
-      >
+      <button onClick={fetchData} disabled={loading} className="load-more-btn">
         LOAD MORE
       </button>
     </div>
