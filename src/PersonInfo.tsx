@@ -31,6 +31,7 @@ function PersonInfo(props: TProps) {
       }}
       className={clsx("person-info", selected && "person-info-selected")}
       onClick={() => onSelect(person.id, selected)}
+      role="button"
     >
       <div className="firstNameLastName">{person.firstNameLastName}</div>
       <div className="jobTitle">{person.jobTitle}</div>
