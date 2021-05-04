@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import PersonInfo from "./PersonInfo";
+import PersonInfo, { TPerson } from "./PersonInfo";
 import Loader from "./Loader";
 import useFetchData from "./useFetchData";
 
@@ -22,14 +22,18 @@ function App() {
     <div className="App">
       <div className="selected">Selected contacts: {selected.length}</div>
       <div className="list">
-        {data.map((personInfo) => (
-          <PersonInfo
-            key={personInfo.id}
-            person={personInfo}
-            onSelect={onPersonSelect}
-            selected={selected.includes(personInfo.id)}
-          />
-        ))}
+        {[...data]
+          .sort((person: TPerson, _: TPerson) =>
+            selected.includes(person.id) ? -1 : 1
+          )
+          .map((personInfo) => (
+            <PersonInfo
+              key={personInfo.id}
+              person={personInfo}
+              onSelect={onPersonSelect}
+              selected={selected.includes(personInfo.id)}
+            />
+          ))}
       </div>
       {loading && <Loader />}
       {error && (
